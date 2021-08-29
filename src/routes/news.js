@@ -8,12 +8,15 @@ newsRouter.get('', async (req, res) => {
     res.render('news', { articles: newsAPI.data })
   } catch (err) {
     if (err.response) {
+      res.render('news', {articles: null})
       console.log(err.response.data)
       console.log(err.response.status)
       console.log(err.response.header)
     } else if (err.request) {
+      res.render('news', {articles: null})
       console.log(err.request)
     } else {
+      res.render('news', {articles: null})
       console.error('Error', err.message)
     }
   }

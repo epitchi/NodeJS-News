@@ -15,15 +15,21 @@
     </header>
     <div class="wrapper">
         <div class="news">
-            <% articles.forEach(function(article, index){ %>
-                <a href="#" class=" news__card ">
-                    <h2>
+            <% if(articles !=null){%>
+                <% articles.forEach(function(article, index){ %>
+                    <a href="#" class=" news__card ">
+                        <img src="<%- article.thumbnail_url %>" alt="<%- article.title.rendered%>" <h2>
                         <%- article.title.rendered %>
-                    </h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-                    </p>
-                </a>
-                <% }) %>
+                            </h2>
+                            <p>
+                                <%- article.excerpt.rendered %>
+                            </p>
+                            </p>
+                    </a>
+                    <% }) %>
+                        <% } else {%>
+                            No post found.
+                            <%}%>
         </div>
     </div>
 </body>
