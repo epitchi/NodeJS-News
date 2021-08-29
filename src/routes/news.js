@@ -8,15 +8,38 @@ newsRouter.get('', async (req, res) => {
     res.render('news', { articles: newsAPI.data })
   } catch (err) {
     if (err.response) {
-      res.render('news', {articles: null})
+      res.render('news', { articles: null })
       console.log(err.response.data)
       console.log(err.response.status)
       console.log(err.response.header)
     } else if (err.request) {
-      res.render('news', {articles: null})
+      res.render('news', { articles: null })
       console.log(err.request)
     } else {
-      res.render('news', {articles: null})
+      res.render('news', { articles: null })
+      console.error('Error', err.message)
+    }
+  }
+})
+
+newsRouter.get('/:id', async (req, res) => {
+  let articleID = req.params.id
+
+
+  try {
+    const newsAPI = await axios.get(`https://raddy.co.uk/wp-json/wp/v2/posts/${articleID}`)
+    res.render('newsSingle', { article: newsAPI.data })
+  } catch (err) {
+    if (err.response) {
+      res.render('newsSingle', { article: null })
+      console.log(err.response.data)
+      console.log(err.response.status)
+      console.log(err.response.header)
+    } else if (err.request) {
+      res.render('newsSingle', { article: null })
+      console.log(err.request)
+    } else {
+      res.render('newsSingle', { article: null })
       console.error('Error', err.message)
     }
   }
